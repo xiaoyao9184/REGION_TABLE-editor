@@ -10,6 +10,82 @@ Begin VB.Form FrmMain
    LinkTopic       =   "Form1"
    ScaleHeight     =   4335
    ScaleWidth      =   6570
+   Begin VB.PictureBox Wallpaper2 
+      Appearance      =   0  'Flat
+      BackColor       =   &H80000005&
+      BorderStyle     =   0  'None
+      ForeColor       =   &H80000008&
+      Height          =   1200
+      Left            =   3240
+      ScaleHeight     =   1200
+      ScaleWidth      =   1470
+      TabIndex        =   20
+      Top             =   2520
+      Width           =   1470
+      Begin VB.Image Imgicon2 
+         Appearance      =   0  'Flat
+         Height          =   165
+         Index           =   6
+         Left            =   1200
+         Picture         =   "frmMain.frx":0000
+         Top             =   0
+         Width           =   210
+      End
+      Begin VB.Image Imgicon2 
+         Appearance      =   0  'Flat
+         Height          =   165
+         Index           =   5
+         Left            =   960
+         Picture         =   "frmMain.frx":0090
+         Top             =   0
+         Width           =   285
+      End
+      Begin VB.Image Imgicon2 
+         Appearance      =   0  'Flat
+         Height          =   165
+         Index           =   4
+         Left            =   720
+         Picture         =   "frmMain.frx":0134
+         Top             =   0
+         Width           =   180
+      End
+      Begin VB.Image Imgicon2 
+         Appearance      =   0  'Flat
+         Height          =   165
+         Index           =   3
+         Left            =   600
+         Picture         =   "frmMain.frx":01A7
+         Top             =   0
+         Width           =   150
+      End
+      Begin VB.Image Imgicon2 
+         Appearance      =   0  'Flat
+         Height          =   165
+         Index           =   2
+         Left            =   480
+         Picture         =   "frmMain.frx":0209
+         Top             =   0
+         Width           =   165
+      End
+      Begin VB.Image Imgicon2 
+         Appearance      =   0  'Flat
+         Height          =   165
+         Index           =   1
+         Left            =   360
+         Picture         =   "frmMain.frx":0265
+         Top             =   0
+         Width           =   165
+      End
+      Begin VB.Image Imgicon2 
+         Appearance      =   0  'Flat
+         Height          =   165
+         Index           =   0
+         Left            =   0
+         Picture         =   "frmMain.frx":02D2
+         Top             =   0
+         Width           =   285
+      End
+   End
    Begin VB.Timer Timer1 
       Interval        =   1000
       Left            =   5400
@@ -19,7 +95,7 @@ Begin VB.Form FrmMain
       Caption         =   "图标显示边框"
       Height          =   255
       Left            =   4800
-      TabIndex        =   19
+      TabIndex        =   15
       Top             =   480
       Width           =   1455
    End
@@ -33,10 +109,10 @@ Begin VB.Form FrmMain
       ForeColor       =   &H80000008&
       Height          =   3300
       Left            =   240
-      Picture         =   "frmMain.frx":0000
+      Picture         =   "frmMain.frx":0350
       ScaleHeight     =   3300
       ScaleWidth      =   2640
-      TabIndex        =   18
+      TabIndex        =   14
       TabStop         =   0   'False
       Top             =   480
       Width           =   2640
@@ -46,7 +122,7 @@ Begin VB.Form FrmMain
          Height          =   225
          Index           =   9
          Left            =   2310
-         Picture         =   "frmMain.frx":370F
+         Picture         =   "frmMain.frx":3A5F
          Top             =   0
          Width           =   330
       End
@@ -56,7 +132,7 @@ Begin VB.Form FrmMain
          Height          =   225
          Index           =   8
          Left            =   2025
-         Picture         =   "frmMain.frx":37CF
+         Picture         =   "frmMain.frx":3B1F
          Top             =   0
          Width           =   285
       End
@@ -75,7 +151,7 @@ Begin VB.Form FrmMain
          Height          =   225
          Index           =   6
          Left            =   1515
-         Picture         =   "frmMain.frx":385F
+         Picture         =   "frmMain.frx":3BAF
          Top             =   0
          Width           =   240
       End
@@ -85,7 +161,7 @@ Begin VB.Form FrmMain
          Height          =   225
          Index           =   5
          Left            =   1245
-         Picture         =   "frmMain.frx":390A
+         Picture         =   "frmMain.frx":3C5A
          Top             =   0
          Width           =   270
       End
@@ -95,7 +171,7 @@ Begin VB.Form FrmMain
          Height          =   225
          Index           =   4
          Left            =   975
-         Picture         =   "frmMain.frx":39BA
+         Picture         =   "frmMain.frx":3D0A
          Top             =   0
          Width           =   270
       End
@@ -105,7 +181,7 @@ Begin VB.Form FrmMain
          Height          =   225
          Index           =   3
          Left            =   780
-         Picture         =   "frmMain.frx":3A45
+         Picture         =   "frmMain.frx":3D95
          Top             =   0
          Width           =   195
       End
@@ -115,7 +191,7 @@ Begin VB.Form FrmMain
          Height          =   225
          Index           =   2
          Left            =   540
-         Picture         =   "frmMain.frx":3AB2
+         Picture         =   "frmMain.frx":3E02
          Top             =   0
          Width           =   240
       End
@@ -125,7 +201,7 @@ Begin VB.Form FrmMain
          Height          =   225
          Index           =   1
          Left            =   330
-         Picture         =   "frmMain.frx":3B30
+         Picture         =   "frmMain.frx":3E80
          Top             =   0
          Width           =   210
       End
@@ -134,18 +210,10 @@ Begin VB.Form FrmMain
          Height          =   225
          Index           =   0
          Left            =   0
-         Picture         =   "frmMain.frx":3BB4
+         Picture         =   "frmMain.frx":3F04
          Top             =   0
          Width           =   330
       End
-   End
-   Begin VB.ComboBox cbbfontNO 
-      Height          =   300
-      Left            =   4080
-      TabIndex        =   10
-      Text            =   "请选择字体编号"
-      Top             =   3240
-      Width           =   2055
    End
    Begin VB.VScrollBar VSXY 
       Height          =   375
@@ -179,54 +247,62 @@ Begin VB.Form FrmMain
       Top             =   960
       Width           =   255
    End
-   Begin VB.TextBox txttime 
-      Appearance      =   0  'Flat
-      BackColor       =   &H8000000F&
-      BorderStyle     =   0  'None
-      BeginProperty Font 
-         Name            =   "宋体"
-         Size            =   9
-         Charset         =   134
-         Weight          =   700
-         Underline       =   0   'False
-         Italic          =   0   'False
-         Strikethrough   =   0   'False
-      EndProperty
-      Height          =   270
-      Left            =   3240
-      TabIndex        =   17
-      TabStop         =   0   'False
-      Text            =   "time"
-      Top             =   2760
-      Width           =   975
-   End
-   Begin VB.TextBox txthint 
-      Appearance      =   0  'Flat
-      BackColor       =   &H8000000F&
-      BorderStyle     =   0  'None
-      Height          =   255
-      Left            =   3240
-      TabIndex        =   16
-      TabStop         =   0   'False
-      Text            =   "调用字体"
-      Top             =   3360
-      Width           =   735
-   End
-   Begin VB.CommandButton cmdtimeColor 
-      Caption         =   "颜色"
-      Height          =   375
-      Left            =   4560
-      TabIndex        =   9
-      Top             =   2640
-      Width           =   615
-   End
    Begin VB.Frame Fra_time_area 
       Caption         =   "时间相关"
       Height          =   1335
       Left            =   3120
-      TabIndex        =   15
+      TabIndex        =   13
       Top             =   2400
       Width           =   3135
+      Begin VB.TextBox txthint 
+         Appearance      =   0  'Flat
+         BackColor       =   &H8000000F&
+         BorderStyle     =   0  'None
+         Height          =   255
+         Left            =   120
+         TabIndex        =   19
+         TabStop         =   0   'False
+         Text            =   "调用字体"
+         Top             =   840
+         Width           =   735
+      End
+      Begin VB.ComboBox cbbfontNO 
+         Height          =   300
+         Left            =   960
+         TabIndex        =   18
+         Text            =   "请选择字体编号"
+         Top             =   840
+         Width           =   2055
+      End
+      Begin VB.TextBox txttime 
+         Appearance      =   0  'Flat
+         BackColor       =   &H8000000F&
+         BorderStyle     =   0  'None
+         BeginProperty Font 
+            Name            =   "宋体"
+            Size            =   9
+            Charset         =   134
+            Weight          =   700
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   270
+         Left            =   120
+         TabIndex        =   17
+         TabStop         =   0   'False
+         Text            =   "time"
+         Top             =   360
+         Width           =   975
+      End
+      Begin VB.CommandButton cmdtimeColor 
+         Caption         =   "颜色"
+         Height          =   375
+         Left            =   1560
+         TabIndex        =   16
+         Top             =   240
+         Width           =   615
+      End
    End
    Begin VB.TextBox txtXY 
       Height          =   390
@@ -280,7 +356,7 @@ Begin VB.Form FrmMain
       Height          =   255
       Index           =   3
       Left            =   4800
-      TabIndex        =   14
+      TabIndex        =   12
       Top             =   1800
       Width           =   495
    End
@@ -289,7 +365,7 @@ Begin VB.Form FrmMain
       Height          =   255
       Index           =   2
       Left            =   4800
-      TabIndex        =   13
+      TabIndex        =   11
       Top             =   1080
       Width           =   495
    End
@@ -298,7 +374,7 @@ Begin VB.Form FrmMain
       Height          =   255
       Index           =   1
       Left            =   3240
-      TabIndex        =   12
+      TabIndex        =   10
       Top             =   1800
       Width           =   495
    End
@@ -307,7 +383,7 @@ Begin VB.Form FrmMain
       Height          =   255
       Index           =   0
       Left            =   3240
-      TabIndex        =   11
+      TabIndex        =   9
       Top             =   1080
       Width           =   495
    End
@@ -315,6 +391,12 @@ Begin VB.Form FrmMain
       Caption         =   "文件(&F)"
       Begin VB.Menu munNew 
          Caption         =   "新建(&N)"
+         Begin VB.Menu L7E398 
+            Caption         =   "L7/E398"
+         End
+         Begin VB.Menu V3V3I 
+            Caption         =   "V3/V3I"
+         End
       End
       Begin VB.Menu munOpen 
          Caption         =   "打开(&O)"
@@ -350,16 +432,6 @@ Attribute VB_Exposed = False
 Option Explicit
 Dim DragX As Single, DragY As Single
 Private Sub Form_Load()
-cbbSelect.AddItem "信号"
-cbbSelect.AddItem "GPRS"
-cbbSelect.AddItem "数据"
-cbbSelect.AddItem "漫游"
-cbbSelect.AddItem "拨号"
-cbbSelect.AddItem "JAVA"
-cbbSelect.AddItem "短信"
-cbbSelect.AddItem "时间"
-cbbSelect.AddItem "铃音"
-cbbSelect.AddItem "电量"
 cbbfontNO.AddItem "00|??"
 cbbfontNO.AddItem "01|最常用的字体"
 cbbfontNO.AddItem "02|(和01一样，不明)"
@@ -384,10 +456,19 @@ cbbfontNO.AddItem "14|中文拼音输入"
 txttime.Text = Time
 munSave.Enabled = False
 munSaveAs.Enabled = False
+Wallpaper.Enabled = False
+Dim i As Byte
+For i = 0 To 3
+    txtXY(i).Enabled = False
+    VSXY(i).Enabled = False
+Next
+Wallpaper2.Visible = False
+Fra_time_area.Visible = False
 
 load_cfg (App.path & "\Config.cfg")
 apply_Picture (PictureFT)
 End Sub
+
 Private Sub Timer1_Timer()
     txttime.Text = Time
 End Sub
@@ -417,22 +498,35 @@ Private Sub munSave_Click()
     If Savepath = "" Then Call munSaveAs_Click: Exit Sub
     SaveDAT (Savepath)
 End Sub
-Private Sub munNew_Click()
-    OpenDAT (App.path & "\Config.cfg")
-    Savepath = ""
-    munSaveAs.Enabled = True
-    munSave.Enabled = True
-End Sub
+
 Private Sub munOpen_Click()
 CommonDialog1.Filter = "状态栏时间各种颜色的位置文件|REGION_TABLE"
 CommonDialog1.CancelError = True
 On Error Resume Next
 CommonDialog1.ShowOpen
 If CommonDialog1.FileName = "" Or Err.Number = 32755 Then Exit Sub
+'确定机型
+Open CommonDialog1.FileName For Binary As #1
+    Platform = IIf(LOF(1) <= 96, 1, 2)
+Close #1
     OpenDAT (CommonDialog1.FileName)
     Savepath = CommonDialog1.FileName
     munSave.Enabled = True
     munSaveAs.Enabled = True
+End Sub
+Private Sub L7E398_Click()
+    Platform = 1
+    OpenDAT (App.path & "\Config.cfg")
+    Savepath = ""
+    munSaveAs.Enabled = True
+    munSave.Enabled = True
+End Sub
+Private Sub V3V3I_Click()
+    Platform = 2
+    OpenDAT (App.path & "\Config2.cfg")
+    Savepath = ""
+    munSaveAs.Enabled = True
+    munSave.Enabled = True
 End Sub
 
 '更改时间颜色
@@ -478,8 +572,13 @@ End Sub
 '显示位置图标数据
 Private Sub cbbSelect_Click()
 Dim i%
+nowform = IIf(cbbSelect.ListIndex > 9, 2, 1)
 For i = 0 To 3 '选择第几个，就把第几个数据从数组中读入TXT
-    txtXY(i).Text = icon10(cbbSelect.ListIndex, i)
+    If nowform = 2 Then
+        txtXY(i).Text = icon7(cbbSelect.ListIndex - 10, i)
+    Else
+        txtXY(i).Text = icon10(cbbSelect.ListIndex, i)
+    End If
 Next i
 End Sub
 
@@ -499,23 +598,40 @@ Private Sub txtXY_Change(Index As Integer)
     End If
 End Sub
 
-'更改位置图标数据-箭头调整体现-连接txtXY,Imgicon
+
+
+'更改位置图标数据-箭头调整体现-连接txtXY,Imgicon1\2,数据
 Private Sub VSXY_Change(Index As Integer)
 txtXY(Index).Text = VSXY(Index).Value
-Select Case Index
-Case 0
-    Imgicon(cbbSelect.ListIndex).Left = VSXY(0).Value * 15
-Case 1
-    Imgicon(cbbSelect.ListIndex).Top = VSXY(1).Value * 15
-Case 2
-    Imgicon(cbbSelect.ListIndex).Width = VSXY(2).Value * 15
-Case 3
-    Imgicon(cbbSelect.ListIndex).Height = VSXY(3).Value * 15
-End Select
-icon10(cbbSelect.ListIndex, Index) = VSXY(Index).Value          '数据保存到数组
+If nowform = 2 Then
+    Select Case Index
+    Case 0
+        Imgicon2(cbbSelect.ListIndex - 10).Left = VSXY(0).Value * 15
+    Case 1
+        Imgicon2(cbbSelect.ListIndex - 10).Top = VSXY(1).Value * 15
+    Case 2
+        Imgicon2(cbbSelect.ListIndex - 10).Width = VSXY(2).Value * 15
+    Case 3
+        Imgicon2(cbbSelect.ListIndex - 10).Height = VSXY(3).Value * 15
+    End Select
+    icon7(cbbSelect.ListIndex - 10, Index) = VSXY(Index).Value         '数据保存到数组
+Else
+    Select Case Index
+    Case 0
+        Imgicon(cbbSelect.ListIndex).Left = VSXY(0).Value * 15
+    Case 1
+        Imgicon(cbbSelect.ListIndex).Top = VSXY(1).Value * 15
+    Case 2
+        Imgicon(cbbSelect.ListIndex).Width = VSXY(2).Value * 15
+    Case 3
+        Imgicon(cbbSelect.ListIndex).Height = VSXY(3).Value * 15
+    End Select
+    icon10(cbbSelect.ListIndex, Index) = VSXY(Index).Value          '数据保存到数组
+End If
 End Sub
 '更改位置图标数据-图标调整体现-连接txtXY
 Private Sub Imgicon_MouseDown(Index As Integer, Button As Integer, Shift As Integer, X As Single, Y As Single)
+nowform = 1
 cbbSelect.ListIndex = Index '下拉列表响应
 
 Dim i%
@@ -537,8 +653,8 @@ RetValue = ClientToScreen(Wallpaper.hwnd, CurrentPoint) 'CurrentPoint是代表Wallp
 With ClipRect
     .Top = CurrentPoint.Y + DragY \ Screen.TwipsPerPixelY '单位是像素（+）
     .Left = CurrentPoint.X + DragX \ Screen.TwipsPerPixelX
-    .Right = CurrentPoint.X + 176 - (Imgicon(Index).Width - DragX) \ Screen.TwipsPerPixelX
-    .Bottom = CurrentPoint.Y + 220 - (Imgicon(Index).Height - DragY) \ Screen.TwipsPerPixelY
+    .Right = CurrentPoint.X + 176 - (Imgicon(Index).Width - DragX) \ Screen.TwipsPerPixelX + 1 '+1修正边界问题
+    .Bottom = CurrentPoint.Y + 220 - (Imgicon(Index).Height - DragY) \ Screen.TwipsPerPixelY + 1 '+1修正边界问题
 End With ' clip it
 RetValue = ClipCursor(ClipRect)
 
@@ -562,9 +678,65 @@ ElseIf (X - DragX) <= 0 And (Y - DragY) <= 0 Then
 End If
 RetValue = ClipCursorClear(0)
 End Sub
+
+Private Sub Wallpaper2_DragDrop(Source As Control, X As Single, Y As Single)
+Dim i%
+For i = 0 To 6
+    Imgicon2(i).Enabled = True
+Next i
+'读入TXT
+txtXY(0).Text = (X - DragX) \ 15
+txtXY(1).Text = (Y - DragY) \ 15
+    '边界超出问题
+If (X - DragX) >= 0 And (Y - DragY) <= 0 Then
+    txtXY(1).Text = 0
+ElseIf (X - DragX) <= 0 And (Y - DragY) >= 0 Then
+    txtXY(0).Text = 0
+ElseIf (X - DragX) <= 0 And (Y - DragY) <= 0 Then
+    txtXY(0).Text = 0
+    txtXY(1).Text = 0
+End If
+RetValue = ClipCursorClear(0)
+End Sub
+'更改位置图标数据-图标调整体现-连接txtXY
+Private Sub Imgicon2_MouseDown(Index As Integer, Button As Integer, Shift As Integer, X As Single, Y As Single)
+nowform = 2
+cbbSelect.ListIndex = Index + 10 '下拉列表响应
+
+Dim i%
+For i = 0 To 6
+    Imgicon2(i).Enabled = False '设置图标不可用（这样拖动到其他图标上时不会影响坐标）
+Next i
+
+Imgicon2(Index).Drag 1       '设置可拖动
+DragX = X                   '鼠标在此图标上的X坐标
+DragY = Y                   '鼠标在此图标上的Y坐标
+
+'限制拖动区域：开始
+With CurrentPoint
+    .X = 0
+    .Y = 0
+End With
+' find position on the screen (not the window)
+RetValue = ClientToScreen(Wallpaper2.hwnd, CurrentPoint) 'CurrentPoint是代表Wallpaper的坐标
+With ClipRect
+    .Top = CurrentPoint.Y + DragY \ Screen.TwipsPerPixelY '单位是像素（+）
+    .Left = CurrentPoint.X + DragX \ Screen.TwipsPerPixelX
+    .Right = CurrentPoint.X + 98 - (Imgicon2(Index).Width - DragX) \ Screen.TwipsPerPixelX + 1 '+1修正边界问题
+    .Bottom = CurrentPoint.Y + 80 - (Imgicon2(Index).Height - DragY) \ Screen.TwipsPerPixelY + 1 '+1修正边界问题
+End With ' clip it
+RetValue = ClipCursor(ClipRect)
+
+End Sub
+
+
+'图标显示边框
 Private Sub chkIconBS_Click()
 Dim i As Byte
 For i = 0 To 9
     Imgicon(i).BorderStyle = chkIconBS.Value
+Next i
+For i = 0 To 6
+    Imgicon2(i).BorderStyle = chkIconBS.Value
 Next i
 End Sub

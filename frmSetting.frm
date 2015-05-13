@@ -2,19 +2,19 @@ VERSION 5.00
 Object = "{F9043C88-F6F2-101A-A3C9-08002B2F49FB}#1.2#0"; "COMDLG32.OCX"
 Begin VB.Form frmSetting 
    Caption         =   "设置"
-   ClientHeight    =   4425
+   ClientHeight    =   5205
    ClientLeft      =   4185
    ClientTop       =   3330
    ClientWidth     =   5730
    LinkTopic       =   "Form1"
-   ScaleHeight     =   4425
+   ScaleHeight     =   5205
    ScaleWidth      =   5730
    Begin VB.CommandButton cmdapply 
       Caption         =   "应用"
       Height          =   375
       Left            =   4320
       TabIndex        =   4
-      Top             =   3840
+      Top             =   4680
       Width           =   975
    End
    Begin VB.CommandButton cmdSave 
@@ -22,7 +22,7 @@ Begin VB.Form frmSetting
       Height          =   375
       Left            =   3120
       TabIndex        =   3
-      Top             =   3840
+      Top             =   4680
       Width           =   975
    End
    Begin VB.CheckBox chkPicture 
@@ -35,11 +35,29 @@ Begin VB.Form frmSetting
    End
    Begin VB.Frame fraPicture 
       Caption         =   "图片目录"
-      Height          =   2775
+      Height          =   3495
       Left            =   360
       TabIndex        =   6
       Top             =   960
       Width           =   5055
+      Begin VB.TextBox txtIcon2 
+         Appearance      =   0  'Flat
+         BackColor       =   &H8000000F&
+         BorderStyle     =   0  'None
+         Height          =   255
+         Left            =   1680
+         TabIndex        =   15
+         Top             =   3000
+         Width           =   3135
+      End
+      Begin VB.CommandButton cmdIcon2 
+         Caption         =   "外屏目录"
+         Height          =   495
+         Left            =   240
+         TabIndex        =   13
+         Top             =   2880
+         Width           =   1095
+      End
       Begin VB.TextBox txtIcon 
          Appearance      =   0  'Flat
          BackColor       =   &H8000000F&
@@ -71,17 +89,19 @@ Begin VB.Form frmSetting
          Top             =   2040
          Width           =   1095
       End
-      Begin VB.OptionButton optPictureSuff 
+      Begin VB.OptionButton optPictureSuff_Other 
          Caption         =   "默认"
          Height          =   255
+         Index           =   0
          Left            =   240
          TabIndex        =   5
          Top             =   360
          Width           =   735
       End
-      Begin VB.OptionButton optPictureOther 
+      Begin VB.OptionButton optPictureSuff_Other 
          Caption         =   "其他目录"
          Height          =   255
+         Index           =   1
          Left            =   240
          TabIndex        =   1
          Top             =   840
@@ -94,6 +114,14 @@ Begin VB.Form frmSetting
          TabIndex        =   2
          Top             =   1200
          Width           =   1095
+      End
+      Begin VB.Label Label4 
+         Caption         =   "仅用于V3/V3I"
+         Height          =   255
+         Left            =   240
+         TabIndex        =   14
+         Top             =   2640
+         Width           =   1575
       End
       Begin VB.Label Label3 
          Caption         =   "选择目录下任何一个GIF文件即可指定此目录为状态栏目录"
@@ -122,8 +150,8 @@ Begin VB.Form frmSetting
       End
    End
    Begin MSComDlg.CommonDialog CommonDialog1 
-      Left            =   360
-      Top             =   3840
+      Left            =   0
+      Top             =   4680
       _ExtentX        =   847
       _ExtentY        =   847
       _Version        =   393216
@@ -135,57 +163,40 @@ Attribute VB_Creatable = False
 Attribute VB_PredeclaredId = True
 Attribute VB_Exposed = False
 Private Sub Form_Load()
-Close #3
 load_cfg (App.path & "\Config.cfg")
-
 chkPicture.Value = PictureFT
-If PictureFT = 0 Then
-    optPictureSuff.Enabled = False
-    optPictureOther.Enabled = False
-    cmdWallpaper.Enabled = False
-    cmdIcon.Enabled = False
-    cmdapply.Enabled = False
-End If
-If PicturePath = 0 Then
-    optPictureSuff.Value = True
-    txtWallpaper.Text = App.path & "\icon\Wallpaper.jpg"
-    txtIcon.Text = App.path & "\icon"
-Else
-    optPictureOther.Value = True
-    txtWallpaper.Text = WallpaperPath
-    txtIcon.Text = IconPath
-End If
 End Sub
 Private Sub chkPicture_Click()
+txtWallpaper.Text = WallpaperPath
+txtIcon.Text = IconPath
+txtIcon2.Text = IconPath2
 PictureFT = chkPicture.Value
 If chkPicture.Value = 1 Then
-    optPictureSuff.Enabled = True
-    optPictureOther.Enabled = True
-    If optPictureSuff.Value = False Then
-        cmdWallpaper.Enabled = True
-        cmdIcon.Enabled = True
-    End If
+    optPictureSuff_Other(0).Enabled = True
+    optPictureSuff_Other(1).Enabled = True
+    optPictureSuff_Other(PicturePath).Value = True
     cmdapply.Enabled = True
 Else
-    optPictureSuff.Enabled = False
-    optPictureOther.Enabled = False
+    optPictureSuff_Other(0).Enabled = False
+    optPictureSuff_Other(1).Enabled = False
     cmdWallpaper.Enabled = False
     cmdIcon.Enabled = False
+    cmdIcon2.Enabled = False
     cmdapply.Enabled = False
 End If
 End Sub
-Private Sub optPictureSuff_Click()
-If optPictureSuff.Value = True Then
+
+Private Sub optPictureSuff_Other_Click(Index As Integer)
+If Index = 0 Then
     PicturePath = 0
     cmdWallpaper.Enabled = False
     cmdIcon.Enabled = False
-End If
-End Sub
-Private Sub optPictureOther_Click()
-If optPictureOther.Value = True Then
+    cmdIcon2.Enabled = False
+Else
     PicturePath = 1
     cmdWallpaper.Enabled = True
     cmdIcon.Enabled = True
+    cmdIcon2.Enabled = True
 End If
 End Sub
 Private Sub cmdWallpaper_Click()
@@ -208,11 +219,25 @@ If CommonDialog1.FileName = "" Or Err.Number = 32755 Then Exit Sub
     txtIcon.ToolTipText = CurDir()
     IconPath = CurDir()
 End Sub
+Private Sub cmdIcon2_Click()
+CommonDialog1.Filter = "任何一个状态栏图标(*.gif)|*.gif"
+CommonDialog1.CancelError = True
+On Error Resume Next
+CommonDialog1.ShowOpen
+If CommonDialog1.FileName = "" Or Err.Number = 32755 Then Exit Sub
+    txtIcon2.Text = CurDir()
+    txtIcon2.ToolTipText = CurDir()
+    IconPath2 = CurDir()
+End Sub
+
 Private Sub cmdSave_Click()
-Put #3, 82, CByte(PictureFT)
-Put #3, 83, CByte(PicturePath)
-Put #3, 84, WallpaperPath & Chr(13) & Chr(10)
+Open App.path & "\Config.cfg" For Binary As #3
+Put #3, 98, CByte(PictureFT)
+Put #3, 99, CByte(PicturePath)
+Put #3, 100, WallpaperPath & Chr(13) & Chr(10)
 Put #3, , IconPath & Chr(13) & Chr(10)
+Put #3, , IconPath2 & Chr(13) & Chr(10)
+Close #3
 End Sub
 Private Sub cmdapply_Click()
 apply_Picture (PictureFT)
