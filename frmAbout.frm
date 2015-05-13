@@ -48,14 +48,14 @@ Begin VB.Form frmAbout
    Begin VB.Image Img1 
       Height          =   600
       Left            =   0
-      Picture         =   "frmAbout.frx":007A
+      Picture         =   "frmAbout.frx":00C5
       Top             =   0
       Width           =   210
    End
    Begin VB.Image Img2 
       Height          =   1680
       Left            =   0
-      Picture         =   "frmAbout.frx":0444
+      Picture         =   "frmAbout.frx":048F
       Top             =   360
       Width           =   1785
    End
@@ -77,7 +77,7 @@ Begin VB.Form frmAbout
       Width           =   2055
    End
    Begin VB.Label LblScroll 
-      Caption         =   $"frmAbout.frx":2189
+      Caption         =   $"frmAbout.frx":21D4
       Height          =   255
       Left            =   1920
       TabIndex        =   2

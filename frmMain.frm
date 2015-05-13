@@ -10,6 +10,11 @@ Begin VB.Form FrmMain
    LinkTopic       =   "Form1"
    ScaleHeight     =   4335
    ScaleWidth      =   6570
+   Begin VB.Timer Timer1 
+      Interval        =   1000
+      Left            =   5400
+      Top             =   0
+   End
    Begin VB.CheckBox chkIconBS 
       Caption         =   "图标显示边框"
       Height          =   255
@@ -28,7 +33,7 @@ Begin VB.Form FrmMain
       ForeColor       =   &H80000008&
       Height          =   3300
       Left            =   240
-      Picture         =   "FrmMain.frx":0000
+      Picture         =   "frmMain.frx":0000
       ScaleHeight     =   3300
       ScaleWidth      =   2640
       TabIndex        =   18
@@ -41,7 +46,7 @@ Begin VB.Form FrmMain
          Height          =   225
          Index           =   9
          Left            =   2310
-         Picture         =   "FrmMain.frx":370F
+         Picture         =   "frmMain.frx":370F
          Top             =   0
          Width           =   330
       End
@@ -51,7 +56,7 @@ Begin VB.Form FrmMain
          Height          =   225
          Index           =   8
          Left            =   2025
-         Picture         =   "FrmMain.frx":37CF
+         Picture         =   "frmMain.frx":37CF
          Top             =   0
          Width           =   285
       End
@@ -70,7 +75,7 @@ Begin VB.Form FrmMain
          Height          =   225
          Index           =   6
          Left            =   1515
-         Picture         =   "FrmMain.frx":385F
+         Picture         =   "frmMain.frx":385F
          Top             =   0
          Width           =   240
       End
@@ -80,7 +85,7 @@ Begin VB.Form FrmMain
          Height          =   225
          Index           =   5
          Left            =   1245
-         Picture         =   "FrmMain.frx":390A
+         Picture         =   "frmMain.frx":390A
          Top             =   0
          Width           =   270
       End
@@ -90,7 +95,7 @@ Begin VB.Form FrmMain
          Height          =   225
          Index           =   4
          Left            =   975
-         Picture         =   "FrmMain.frx":39BA
+         Picture         =   "frmMain.frx":39BA
          Top             =   0
          Width           =   270
       End
@@ -100,7 +105,7 @@ Begin VB.Form FrmMain
          Height          =   225
          Index           =   3
          Left            =   780
-         Picture         =   "FrmMain.frx":3A45
+         Picture         =   "frmMain.frx":3A45
          Top             =   0
          Width           =   195
       End
@@ -110,7 +115,7 @@ Begin VB.Form FrmMain
          Height          =   225
          Index           =   2
          Left            =   540
-         Picture         =   "FrmMain.frx":3AB2
+         Picture         =   "frmMain.frx":3AB2
          Top             =   0
          Width           =   240
       End
@@ -120,7 +125,7 @@ Begin VB.Form FrmMain
          Height          =   225
          Index           =   1
          Left            =   330
-         Picture         =   "FrmMain.frx":3B30
+         Picture         =   "frmMain.frx":3B30
          Top             =   0
          Width           =   210
       End
@@ -129,7 +134,7 @@ Begin VB.Form FrmMain
          Height          =   225
          Index           =   0
          Left            =   0
-         Picture         =   "FrmMain.frx":3BB4
+         Picture         =   "frmMain.frx":3BB4
          Top             =   0
          Width           =   330
       End
@@ -307,33 +312,33 @@ Begin VB.Form FrmMain
       Width           =   495
    End
    Begin VB.Menu munFile 
-      Caption         =   "文件"
+      Caption         =   "文件(&F)"
       Begin VB.Menu munNew 
-         Caption         =   "新建"
+         Caption         =   "新建(&N)"
       End
       Begin VB.Menu munOpen 
-         Caption         =   "打开"
+         Caption         =   "打开(&O)"
       End
       Begin VB.Menu munSave 
-         Caption         =   "保存"
+         Caption         =   "保存(&S)"
       End
       Begin VB.Menu munSaveAs 
-         Caption         =   "另存为"
+         Caption         =   "另存为(&A)"
       End
       Begin VB.Menu mun_ 
          Caption         =   "-"
       End
       Begin VB.Menu munExit 
-         Caption         =   "退出"
+         Caption         =   "退出(&E)"
       End
    End
    Begin VB.Menu munOther 
-      Caption         =   "其他"
+      Caption         =   "其他(&O)"
       Begin VB.Menu munSetting 
-         Caption         =   "设置"
+         Caption         =   "设置(&S)"
       End
       Begin VB.Menu munAbout 
-         Caption         =   "关于"
+         Caption         =   "关于(&A)"
       End
    End
 End
@@ -380,133 +385,54 @@ txttime.Text = Time
 munSave.Enabled = False
 munSaveAs.Enabled = False
 
-load_cfg (App.Path & "\Config.cfg")
+load_cfg (App.path & "\Config.cfg")
 apply_Picture (PictureFT)
+End Sub
+Private Sub Timer1_Timer()
+    txttime.Text = Time
 End Sub
 
 Private Sub munAbout_Click()
-Load frmAbout
-frmAbout.Show
+    frmAbout.Show
 End Sub
 Private Sub munSetting_Click()
-Load frmSetting
-frmSetting.Show
+    frmSetting.Show
 End Sub
 Private Sub munExit_Click()
-End
+    If MsgBox("保存吗？", vbYesNo, "提示") = vbYes Then Call munSave_Click
+    End
 End Sub
 Private Sub munSaveAs_Click()
-Dim Offset%
 '保存图标位置数据
 CommonDialog1.FileName = "REGION_TABLE"
 CommonDialog1.Filter = "状态栏时间各种颜色的位置文件"
+CommonDialog1.CancelError = True
+On Error Resume Next
 CommonDialog1.ShowSave
-Open CommonDialog1.FileName For Binary As #2
-For Offset = 1 To 73 Step 8
-    save_data (Offset)
-    Put #2, Offset + 1, CInt(one(0)) 'left
-    Put #2, Offset + 3, CInt(one(1)) 'top
-    Put #2, Offset + 5, CInt(one(0) + one(2) - 1) 'right
-    Put #2, Offset + 7, CInt(one(1) + one(3) - 1) 'bottom
-Next Offset
-'保存字体颜色
-RGBt(1) = txttime.ForeColor \ 65536
-RGBt(2) = txttime.ForeColor \ 256 - (txttime.ForeColor \ 65536) * 256
-RGBt(3) = txttime.ForeColor Mod 256
-Put #2, 87, RGBt(1)
-Put #2, 86, RGBt(2)
-Put #2, 85, RGBt(3)
-'保存字体编号
-Put #2, 96, CByte(cbbfontNO.ListIndex)
+If CommonDialog1.FileName = "" Or Err.Number = 32755 Then Exit Sub
+    Savepath = CommonDialog1.FileName
+    SaveDAT (Savepath)
 End Sub
 Private Sub munSave_Click()
-Dim Offset%
-'保存图标位置数据
-For Offset = 1 To 73 Step 8
-    save_data (Offset)
-    Put #1, Offset + 1, CInt(one(0)) '_left
-    Put #1, Offset + 3, CInt(one(1)) '_top
-    Put #1, Offset + 5, CInt(one(0) + one(2) - 1) '_right
-    Put #1, Offset + 7, CInt(one(1) + one(3) - 1) '_bottom
-Next Offset
-'保存字体颜色
-RGBt(1) = txttime.ForeColor \ 65536
-RGBt(2) = txttime.ForeColor \ 256 - (txttime.ForeColor \ 65536) * 256
-RGBt(3) = txttime.ForeColor Mod 256
-Put #1, 87, RGBt(1)
-Put #1, 86, RGBt(2)
-Put #1, 85, RGBt(3)
-'保存字体编号
-Put #1, 96, CByte(cbbfontNO.ListIndex)
+    If Savepath = "" Then Call munSaveAs_Click: Exit Sub
+    SaveDAT (Savepath)
 End Sub
 Private Sub munNew_Click()
-munSaveAs.Enabled = True
-munSave.Enabled = False
-Dim q%, i%, ONE_right As Byte, ONE_bottom As Byte
-txttime.ForeColor = &H0
-cbbfontNO.ListIndex = 0
-For i = 1 To 73 Step 8
-        Get #3, i + 1, one(0)            'left
-        Get #3, i + 3, one(1)            'top
-        Get #3, i + 5, ONE_right
-        Get #3, i + 7, ONE_bottom
-        one(2) = ONE_right - one(0) + 1  'Width
-        one(3) = ONE_bottom - one(1) + 1 'Height
-        '读到图片
-        Imgicon(q).Left = one(0) * 15
-        Imgicon(q).Top = one(1) * 15
-        Imgicon(q).Width = one(2) * 15
-        Imgicon(q).Height = one(3) * 15
-        q = q + 1
-        '读到数组
-        load_data (i)
-    Next i
+    OpenDAT (App.path & "\Config.cfg")
+    Savepath = ""
+    munSaveAs.Enabled = True
+    munSave.Enabled = True
 End Sub
 Private Sub munOpen_Click()
-Close #1
-munSave.Enabled = True
-munSaveAs.Enabled = True
-Dim i%, q%, ONE_right As Byte, ONE_bottom As Byte, TBGR_Color$, fontNO As Byte
-q = 0
 CommonDialog1.Filter = "状态栏时间各种颜色的位置文件|REGION_TABLE"
+CommonDialog1.CancelError = True
+On Error Resume Next
 CommonDialog1.ShowOpen
-If CommonDialog1.FileName <> "" Then
-    Open CommonDialog1.FileName For Binary As #1
-'读取图标位置数据
-    For i = 1 To 76 Step 8
-        Get #1, i + 1, one(0)            'left
-        Get #1, i + 3, one(1)            'top
-        Get #1, i + 5, ONE_right
-        Get #1, i + 7, ONE_bottom
-        one(2) = ONE_right - one(0) + 1  'Width
-        one(3) = ONE_bottom - one(1) + 1 'Height
-        '读到图片
-        Imgicon(q).Left = one(0) * 15
-        Imgicon(q).Top = one(1) * 15
-        Imgicon(q).Width = one(2) * 15
-        Imgicon(q).Height = one(3) * 15
-        q = q + 1
-        '读到数组
-        load_data (i)
-    Next i
-'读取时间颜色，显示时间颜色
-    Get #1, 85, RGBt(3) '红
-    Get #1, 86, RGBt(2) '绿
-    Get #1, 87, RGBt(1) '蓝
-    'Get #1, 88, RGBt(0) '透明
-    TBGR_Color = "&H00000000"
-    For i = 1 To 3
-        If RGBt(i) <= 15 Then   '一/两位
-            Mid(TBGR_Color, (i + 1) * 2 + 1 + 1, 2) = Hex(RGBt(i))
-        Else
-            Mid(TBGR_Color, (i + 1) * 2 + 1, 2) = Hex(RGBt(i))
-        End If
-    Next i
-    txttime.ForeColor = TBGR_Color
-'读取时间字体编号，显示时间字体编号
-    Get #1, 96, fontNO
-    cbbfontNO.ListIndex = fontNO
-End If
+If CommonDialog1.FileName = "" Or Err.Number = 32755 Then Exit Sub
+    OpenDAT (CommonDialog1.FileName)
+    Savepath = CommonDialog1.FileName
+    munSave.Enabled = True
+    munSaveAs.Enabled = True
 End Sub
 
 '更改时间颜色
@@ -557,6 +483,13 @@ For i = 0 To 3 '选择第几个，就把第几个数据从数组中读入TXT
 Next i
 End Sub
 
+'限制输入
+Private Sub txtXY_KeyPress(Index As Integer, KeyAscii As Integer)
+If (KeyAscii < 48 Or KeyAscii > 57) And KeyAscii <> 8 Then KeyAscii = 0
+If KeyAscii = 8 Then Exit Sub
+If CInt(Mid(txtXY(Index).Text, 1, txtXY(Index).SelStart) & Chr(KeyAscii) & Mid(txtXY(Index).Text, txtXY(Index).SelStart + 1)) > 255 Then KeyAscii = 0
+End Sub
+
 '更改位置图标数据-文本调整体现-连接VSXY
 Private Sub txtXY_Change(Index As Integer)
     If txtXY(Index).Text <> "" Then
@@ -565,6 +498,7 @@ Private Sub txtXY_Change(Index As Integer)
         End If
     End If
 End Sub
+
 '更改位置图标数据-箭头调整体现-连接txtXY,Imgicon
 Private Sub VSXY_Change(Index As Integer)
 txtXY(Index).Text = VSXY(Index).Value
@@ -581,7 +515,7 @@ End Select
 icon10(cbbSelect.ListIndex, Index) = VSXY(Index).Value          '数据保存到数组
 End Sub
 '更改位置图标数据-图标调整体现-连接txtXY
-Private Sub Imgicon_MouseDown(Index As Integer, Button As Integer, Shift As Integer, X As Single, y As Single)
+Private Sub Imgicon_MouseDown(Index As Integer, Button As Integer, Shift As Integer, X As Single, Y As Single)
 cbbSelect.ListIndex = Index '下拉列表响应
 
 Dim i%
@@ -591,25 +525,42 @@ Next i
 
 Imgicon(Index).Drag 1       '设置可拖动
 DragX = X                   '鼠标在此图标上的X坐标
-DragY = y                   '鼠标在此图标上的Y坐标
+DragY = Y                   '鼠标在此图标上的Y坐标
+
+'限制拖动区域：开始
+With CurrentPoint
+    .X = 0
+    .Y = 0
+End With
+' find position on the screen (not the window)
+RetValue = ClientToScreen(Wallpaper.hwnd, CurrentPoint) 'CurrentPoint是代表Wallpaper的坐标
+With ClipRect
+    .Top = CurrentPoint.Y + DragY \ Screen.TwipsPerPixelY '单位是像素（+）
+    .Left = CurrentPoint.X + DragX \ Screen.TwipsPerPixelX
+    .Right = CurrentPoint.X + 176 - (Imgicon(Index).Width - DragX) \ Screen.TwipsPerPixelX
+    .Bottom = CurrentPoint.Y + 220 - (Imgicon(Index).Height - DragY) \ Screen.TwipsPerPixelY
+End With ' clip it
+RetValue = ClipCursor(ClipRect)
+
 End Sub
-Private Sub Wallpaper_DragDrop(Source As Control, X As Single, y As Single)
+Private Sub Wallpaper_DragDrop(Source As Control, X As Single, Y As Single)
 Dim i%
 For i = 0 To 9
     Imgicon(i).Enabled = True
 Next i
 '读入TXT
 txtXY(0).Text = (X - DragX) \ 15
-txtXY(1).Text = (y - DragY) \ 15
+txtXY(1).Text = (Y - DragY) \ 15
     '边界超出问题
-If (X - DragX) >= 0 And (y - DragY) <= 0 Then
+If (X - DragX) >= 0 And (Y - DragY) <= 0 Then
     txtXY(1).Text = 0
-ElseIf (X - DragX) <= 0 And (y - DragY) >= 0 Then
+ElseIf (X - DragX) <= 0 And (Y - DragY) >= 0 Then
     txtXY(0).Text = 0
-ElseIf (X - DragX) <= 0 And (y - DragY) <= 0 Then
+ElseIf (X - DragX) <= 0 And (Y - DragY) <= 0 Then
     txtXY(0).Text = 0
     txtXY(1).Text = 0
 End If
+RetValue = ClipCursorClear(0)
 End Sub
 Private Sub chkIconBS_Click()
 Dim i As Byte
