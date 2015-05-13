@@ -90,6 +90,7 @@ Begin VB.Form FrmMain
       End
    End
    Begin VB.Timer Timer1 
+      Enabled         =   0   'False
       Interval        =   1000
       Left            =   5400
       Top             =   0
@@ -433,6 +434,9 @@ Attribute VB_PredeclaredId = True
 Attribute VB_Exposed = False
 Option Explicit
 Dim DragX As Single, DragY As Single
+Private Sub Form_UnLoad(Cancel As Integer)
+    End
+End Sub
 Private Sub Form_Load()
 cbbfontNO.AddItem GetINI("lng", "cbbfontNO00")
 cbbfontNO.AddItem GetINI("lng", "cbbfontNO01")
@@ -481,7 +485,7 @@ Private Sub munSetting_Click()
     frmSetting.Show
 End Sub
 Private Sub munExit_Click()
-    If MsgBox(GetINI("lng", "SavePrompt"), vbYesNo, GetINI("lng", "Savetitle")) = vbYes Then Call munSave_Click
+    If MsgBox(GetINI("lng", "SavePrompt_MG"), vbYesNo, GetINI("lng", "Savetitle_MG")) = vbYes Then Call munSave_Click
     End
 End Sub
 Private Sub munSaveAs_Click()

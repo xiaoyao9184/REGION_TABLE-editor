@@ -186,6 +186,12 @@ Attribute VB_PredeclaredId = True
 Attribute VB_Exposed = False
 Private Sub Form_Load()
 chkPicture.Value = GetINI("Setting", "PictureFT")
+optPictureSuff_Other(0).Enabled = False
+optPictureSuff_Other(1).Enabled = False
+cmdWallpaper.Enabled = False
+cmdWallpaper2.Enabled = False
+cmdIcon.Enabled = False
+cmdIcon2.Enabled = False
 End Sub
 Private Sub chkPicture_Click()
 If chkPicture.Value = 1 Then
@@ -196,12 +202,14 @@ Else
     optPictureSuff_Other(0).Enabled = False
     optPictureSuff_Other(1).Enabled = False
     cmdWallpaper.Enabled = False
+    cmdWallpaper2.Enabled = False
     cmdIcon.Enabled = False
     cmdIcon2.Enabled = False
 End If
 End Sub
 
 Private Sub optPictureSuff_Other_Click(Index As Integer)
+If chkPicture.Value = 0 Then Exit Sub
 If Index = 0 Then
     cmdWallpaper.Enabled = False
     cmdWallpaper2.Enabled = False
