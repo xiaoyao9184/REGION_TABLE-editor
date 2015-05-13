@@ -2,27 +2,27 @@ VERSION 5.00
 Object = "{F9043C88-F6F2-101A-A3C9-08002B2F49FB}#1.2#0"; "COMDLG32.OCX"
 Begin VB.Form frmSetting 
    Caption         =   "设置"
-   ClientHeight    =   5205
+   ClientHeight    =   5955
    ClientLeft      =   4185
    ClientTop       =   3330
-   ClientWidth     =   5730
+   ClientWidth     =   7005
    LinkTopic       =   "Form1"
-   ScaleHeight     =   5205
-   ScaleWidth      =   5730
+   ScaleHeight     =   5955
+   ScaleWidth      =   7005
    Begin VB.CommandButton cmdapply 
       Caption         =   "应用"
       Height          =   375
-      Left            =   4320
+      Left            =   5760
       TabIndex        =   4
-      Top             =   4680
+      Top             =   5400
       Width           =   975
    End
    Begin VB.CommandButton cmdSave 
       Caption         =   "保存"
       Height          =   375
-      Left            =   3120
+      Left            =   4440
       TabIndex        =   3
-      Top             =   4680
+      Top             =   5400
       Width           =   975
    End
    Begin VB.CheckBox chkPicture 
@@ -35,28 +35,48 @@ Begin VB.Form frmSetting
    End
    Begin VB.Frame fraPicture 
       Caption         =   "图片目录"
-      Height          =   3495
+      Height          =   4335
       Left            =   360
       TabIndex        =   6
       Top             =   960
-      Width           =   5055
+      Width           =   6375
+      Begin VB.TextBox txtWallpaper2 
+         Appearance      =   0  'Flat
+         BackColor       =   &H8000000F&
+         BorderStyle     =   0  'None
+         Height          =   270
+         Left            =   1680
+         MousePointer    =   1  'Arrow
+         TabIndex        =   17
+         Top             =   3000
+         Width           =   4455
+      End
+      Begin VB.CommandButton cmdWallpaper2 
+         Caption         =   "外屏背景图片"
+         Height          =   495
+         Left            =   240
+         TabIndex        =   16
+         Top             =   2880
+         Width           =   1215
+      End
       Begin VB.TextBox txtIcon2 
          Appearance      =   0  'Flat
          BackColor       =   &H8000000F&
          BorderStyle     =   0  'None
          Height          =   255
          Left            =   1680
+         MousePointer    =   1  'Arrow
          TabIndex        =   15
-         Top             =   3000
-         Width           =   3135
+         Top             =   3720
+         Width           =   4455
       End
       Begin VB.CommandButton cmdIcon2 
          Caption         =   "外屏目录"
          Height          =   495
          Left            =   240
          TabIndex        =   13
-         Top             =   2880
-         Width           =   1095
+         Top             =   3600
+         Width           =   1215
       End
       Begin VB.TextBox txtIcon 
          Appearance      =   0  'Flat
@@ -65,9 +85,10 @@ Begin VB.Form frmSetting
          Height          =   270
          Left            =   1680
          Locked          =   -1  'True
+         MousePointer    =   1  'Arrow
          TabIndex        =   11
          Top             =   2160
-         Width           =   3135
+         Width           =   4455
       End
       Begin VB.TextBox txtWallpaper 
          Appearance      =   0  'Flat
@@ -79,7 +100,7 @@ Begin VB.Form frmSetting
          MousePointer    =   1  'Arrow
          TabIndex        =   10
          Top             =   1320
-         Width           =   3135
+         Width           =   4455
       End
       Begin VB.CommandButton cmdIcon 
          Caption         =   "状态栏目录"
@@ -87,7 +108,7 @@ Begin VB.Form frmSetting
          Left            =   240
          TabIndex        =   9
          Top             =   2040
-         Width           =   1095
+         Width           =   1215
       End
       Begin VB.OptionButton optPictureSuff_Other 
          Caption         =   "默认"
@@ -113,7 +134,7 @@ Begin VB.Form frmSetting
          Left            =   240
          TabIndex        =   2
          Top             =   1200
-         Width           =   1095
+         Width           =   1215
       End
       Begin VB.Label Label4 
          Caption         =   "仅用于V3/V3I"
@@ -163,11 +184,12 @@ Attribute VB_Creatable = False
 Attribute VB_PredeclaredId = True
 Attribute VB_Exposed = False
 Private Sub Form_Load()
-load_cfg (App.path & "\Config.cfg")
+load_cfg (App.Path & "\Config.cfg")
 chkPicture.Value = PictureFT
 End Sub
 Private Sub chkPicture_Click()
 txtWallpaper.Text = WallpaperPath
+txtWallpaper2.Text = Wallpaper2Path
 txtIcon.Text = IconPath
 txtIcon2.Text = IconPath2
 PictureFT = chkPicture.Value
@@ -190,11 +212,13 @@ Private Sub optPictureSuff_Other_Click(Index As Integer)
 If Index = 0 Then
     PicturePath = 0
     cmdWallpaper.Enabled = False
+    cmdWallpaper2.Enabled = False
     cmdIcon.Enabled = False
     cmdIcon2.Enabled = False
 Else
     PicturePath = 1
     cmdWallpaper.Enabled = True
+    cmdWallpaper2.Enabled = True
     cmdIcon.Enabled = True
     cmdIcon2.Enabled = True
 End If
@@ -208,6 +232,16 @@ If CommonDialog1.FileName = "" Or Err.Number = 32755 Then Exit Sub
     txtWallpaper.Text = CommonDialog1.FileName
     txtWallpaper.ToolTipText = CommonDialog1.FileName
     WallpaperPath = CommonDialog1.FileName
+End Sub
+Private Sub cmdWallpaper2_Click()
+CommonDialog1.Filter = "BMP(*.bmp)|*.bmp|GIF(*.gif)|*.gif|JPEG(*.jpg)|*.jpg"
+CommonDialog1.CancelError = True
+On Error Resume Next
+CommonDialog1.ShowOpen
+If CommonDialog1.FileName = "" Or Err.Number = 32755 Then Exit Sub
+    txtWallpaper2.Text = CommonDialog1.FileName
+    txtWallpaper2.ToolTipText = CommonDialog1.FileName
+    Wallpaper2Path = CommonDialog1.FileName
 End Sub
 Private Sub cmdIcon_Click()
 CommonDialog1.Filter = "任何一个状态栏图标(*.gif)|*.gif"
@@ -231,10 +265,11 @@ If CommonDialog1.FileName = "" Or Err.Number = 32755 Then Exit Sub
 End Sub
 
 Private Sub cmdSave_Click()
-Open App.path & "\Config.cfg" For Binary As #3
+Open App.Path & "\Config.cfg" For Binary As #3
 Put #3, 98, CByte(PictureFT)
 Put #3, 99, CByte(PicturePath)
 Put #3, 100, WallpaperPath & Chr(13) & Chr(10)
+Put #3, , Wallpaper2Path & Chr(13) & Chr(10)
 Put #3, , IconPath & Chr(13) & Chr(10)
 Put #3, , IconPath2 & Chr(13) & Chr(10)
 Close #3

@@ -1,13 +1,15 @@
 VERSION 5.00
 Object = "{F9043C88-F6F2-101A-A3C9-08002B2F49FB}#1.2#0"; "COMDLG32.OCX"
 Begin VB.Form FrmMain 
+   BorderStyle     =   1  'Fixed Single
    Caption         =   "REGION_TABLE ±à¼­Æ÷"
    ClientHeight    =   4335
-   ClientLeft      =   3810
-   ClientTop       =   3555
+   ClientLeft      =   3795
+   ClientTop       =   3540
    ClientWidth     =   6570
    ForeColor       =   &H80000008&
    LinkTopic       =   "Form1"
+   MaxButton       =   0   'False
    ScaleHeight     =   4335
    ScaleWidth      =   6570
    Begin VB.PictureBox Wallpaper2 
@@ -16,7 +18,8 @@ Begin VB.Form FrmMain
       BorderStyle     =   0  'None
       ForeColor       =   &H80000008&
       Height          =   1200
-      Left            =   3240
+      Left            =   3120
+      Picture         =   "frmMain.frx":0000
       ScaleHeight     =   1200
       ScaleWidth      =   1470
       TabIndex        =   20
@@ -26,8 +29,8 @@ Begin VB.Form FrmMain
          Appearance      =   0  'Flat
          Height          =   165
          Index           =   6
-         Left            =   1200
-         Picture         =   "frmMain.frx":0000
+         Left            =   1235
+         Picture         =   "frmMain.frx":0DE2
          Top             =   0
          Width           =   210
       End
@@ -35,8 +38,8 @@ Begin VB.Form FrmMain
          Appearance      =   0  'Flat
          Height          =   165
          Index           =   5
-         Left            =   960
-         Picture         =   "frmMain.frx":0090
+         Left            =   950
+         Picture         =   "frmMain.frx":0E72
          Top             =   0
          Width           =   285
       End
@@ -44,8 +47,8 @@ Begin VB.Form FrmMain
          Appearance      =   0  'Flat
          Height          =   165
          Index           =   4
-         Left            =   720
-         Picture         =   "frmMain.frx":0134
+         Left            =   769
+         Picture         =   "frmMain.frx":0F16
          Top             =   0
          Width           =   180
       End
@@ -53,8 +56,8 @@ Begin VB.Form FrmMain
          Appearance      =   0  'Flat
          Height          =   165
          Index           =   3
-         Left            =   600
-         Picture         =   "frmMain.frx":01A7
+         Left            =   618
+         Picture         =   "frmMain.frx":0F89
          Top             =   0
          Width           =   150
       End
@@ -62,8 +65,8 @@ Begin VB.Form FrmMain
          Appearance      =   0  'Flat
          Height          =   165
          Index           =   2
-         Left            =   480
-         Picture         =   "frmMain.frx":0209
+         Left            =   452
+         Picture         =   "frmMain.frx":0FEB
          Top             =   0
          Width           =   165
       End
@@ -71,8 +74,8 @@ Begin VB.Form FrmMain
          Appearance      =   0  'Flat
          Height          =   165
          Index           =   1
-         Left            =   360
-         Picture         =   "frmMain.frx":0265
+         Left            =   286
+         Picture         =   "frmMain.frx":1047
          Top             =   0
          Width           =   165
       End
@@ -81,7 +84,7 @@ Begin VB.Form FrmMain
          Height          =   165
          Index           =   0
          Left            =   0
-         Picture         =   "frmMain.frx":02D2
+         Picture         =   "frmMain.frx":10B4
          Top             =   0
          Width           =   285
       End
@@ -109,7 +112,7 @@ Begin VB.Form FrmMain
       ForeColor       =   &H80000008&
       Height          =   3300
       Left            =   240
-      Picture         =   "frmMain.frx":0350
+      Picture         =   "frmMain.frx":1132
       ScaleHeight     =   3300
       ScaleWidth      =   2640
       TabIndex        =   14
@@ -122,7 +125,7 @@ Begin VB.Form FrmMain
          Height          =   225
          Index           =   9
          Left            =   2310
-         Picture         =   "frmMain.frx":3A5F
+         Picture         =   "frmMain.frx":4841
          Top             =   0
          Width           =   330
       End
@@ -132,7 +135,7 @@ Begin VB.Form FrmMain
          Height          =   225
          Index           =   8
          Left            =   2025
-         Picture         =   "frmMain.frx":3B1F
+         Picture         =   "frmMain.frx":4901
          Top             =   0
          Width           =   285
       End
@@ -151,7 +154,7 @@ Begin VB.Form FrmMain
          Height          =   225
          Index           =   6
          Left            =   1515
-         Picture         =   "frmMain.frx":3BAF
+         Picture         =   "frmMain.frx":4991
          Top             =   0
          Width           =   240
       End
@@ -161,7 +164,7 @@ Begin VB.Form FrmMain
          Height          =   225
          Index           =   5
          Left            =   1245
-         Picture         =   "frmMain.frx":3C5A
+         Picture         =   "frmMain.frx":4A3C
          Top             =   0
          Width           =   270
       End
@@ -171,7 +174,7 @@ Begin VB.Form FrmMain
          Height          =   225
          Index           =   4
          Left            =   975
-         Picture         =   "frmMain.frx":3D0A
+         Picture         =   "frmMain.frx":4AEC
          Top             =   0
          Width           =   270
       End
@@ -181,7 +184,7 @@ Begin VB.Form FrmMain
          Height          =   225
          Index           =   3
          Left            =   780
-         Picture         =   "frmMain.frx":3D95
+         Picture         =   "frmMain.frx":4B77
          Top             =   0
          Width           =   195
       End
@@ -191,7 +194,7 @@ Begin VB.Form FrmMain
          Height          =   225
          Index           =   2
          Left            =   540
-         Picture         =   "frmMain.frx":3E02
+         Picture         =   "frmMain.frx":4BE4
          Top             =   0
          Width           =   240
       End
@@ -201,7 +204,7 @@ Begin VB.Form FrmMain
          Height          =   225
          Index           =   1
          Left            =   330
-         Picture         =   "frmMain.frx":3E80
+         Picture         =   "frmMain.frx":4C62
          Top             =   0
          Width           =   210
       End
@@ -210,7 +213,7 @@ Begin VB.Form FrmMain
          Height          =   225
          Index           =   0
          Left            =   0
-         Picture         =   "frmMain.frx":3F04
+         Picture         =   "frmMain.frx":4CE6
          Top             =   0
          Width           =   330
       End
@@ -394,8 +397,8 @@ Begin VB.Form FrmMain
          Begin VB.Menu L7E398 
             Caption         =   "L7/E398"
          End
-         Begin VB.Menu V3V3I 
-            Caption         =   "V3/V3I"
+         Begin VB.Menu V3I 
+            Caption         =   "V3I"
          End
       End
       Begin VB.Menu munOpen 
@@ -465,7 +468,7 @@ Next
 Wallpaper2.Visible = False
 Fra_time_area.Visible = False
 
-load_cfg (App.path & "\Config.cfg")
+load_cfg (App.Path & "\Config.cfg")
 apply_Picture (PictureFT)
 End Sub
 
@@ -516,14 +519,14 @@ Close #1
 End Sub
 Private Sub L7E398_Click()
     Platform = 1
-    OpenDAT (App.path & "\Config.cfg")
+    OpenDAT (App.Path & "\Config.cfg")
     Savepath = ""
     munSaveAs.Enabled = True
     munSave.Enabled = True
 End Sub
-Private Sub V3V3I_Click()
+Private Sub V3I_Click()
     Platform = 2
-    OpenDAT (App.path & "\Config2.cfg")
+    OpenDAT (App.Path & "\Config2.cfg")
     Savepath = ""
     munSaveAs.Enabled = True
     munSave.Enabled = True

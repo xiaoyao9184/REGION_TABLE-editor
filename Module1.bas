@@ -1,7 +1,7 @@
 Attribute VB_Name = "Module1"
 Option Explicit
 Public PictureFT As Byte, PicturePath As Byte '加载图片，默认/其他
-Public WallpaperPath$, IconPath$, IconPath2$ '背景，主屏，外屏
+Public WallpaperPath$, Wallpaper2Path$, IconPath$, IconPath2$ '背景，主屏，外屏
 
 Public Platform As Byte '机型（1=L7/E398，2=V3/V3I）
 Public Savepath$ '保存路径
@@ -53,6 +53,8 @@ Open cfgPath For Binary As #3
     Seek #3, 104
     Line Input #3, WallpaperPath
     Seek #3, Seek(3) + 4
+    Line Input #3, Wallpaper2Path
+    Seek #3, Seek(3) + 4
     Line Input #3, IconPath
     Seek #3, Seek(3) + 4
     Line Input #3, IconPath2
@@ -62,33 +64,38 @@ Public Sub apply_Picture(FT)
 Dim nowPath$, nowPath2$
 If FT = 1 Then
     If PicturePath = 0 Then
-        nowPath = App.path & "\icon"
-        nowPath2 = App.path & "\icon\V3I"
-        FrmMain.Wallpaper.Picture = LoadPicture(App.path & "\icon\Wallpaper.jpg")
+        nowPath = App.Path & "\icon"
+        nowPath2 = App.Path & "\icon\V3I"
+        FrmMain.Wallpaper.Picture = LoadPicture(LoadP(App.Path & "\icon\Wallpaper.jpg"))
+        FrmMain.Wallpaper2.Picture = LoadPicture(LoadP(App.Path & "\icon\V3I\cl.gif"))
     Else
         nowPath = IconPath
         nowPath2 = IconPath2
-        FrmMain.Wallpaper.Picture = LoadPicture(WallpaperPath)
+        FrmMain.Wallpaper.Picture = LoadPicture(LoadP(WallpaperPath))
+        FrmMain.Wallpaper2.Picture = LoadPicture(LoadP(Wallpaper2Path))
     End If
-FrmMain.Imgicon(0).Picture = LoadPicture(nowPath & "\415.gif")
-FrmMain.Imgicon(1).Picture = LoadPicture(nowPath & "\404.gif")
-FrmMain.Imgicon(2).Picture = LoadPicture(nowPath & "\407.gif")
-FrmMain.Imgicon(3).Picture = LoadPicture(nowPath & "\473.gif")
-FrmMain.Imgicon(4).Picture = LoadPicture(nowPath & "\391.gif")
-FrmMain.Imgicon(5).Picture = LoadPicture(nowPath & "\457.gif")
-FrmMain.Imgicon(6).Picture = LoadPicture(nowPath & "\394.gif")
-FrmMain.Imgicon(8).Picture = LoadPicture(nowPath & "\416.gif")
-FrmMain.Imgicon(9).Picture = LoadPicture(nowPath & "\335.gif")
-FrmMain.Imgicon2(0).Picture = LoadPicture(nowPath2 & "\595.gif")
-FrmMain.Imgicon2(1).Picture = LoadPicture(nowPath2 & "\623.gif")
-FrmMain.Imgicon2(2).Picture = LoadPicture(nowPath2 & "\627.gif")
-FrmMain.Imgicon2(3).Picture = LoadPicture(nowPath2 & "\626.gif")
-FrmMain.Imgicon2(4).Picture = LoadPicture(nowPath2 & "\618.gif")
-FrmMain.Imgicon2(5).Picture = LoadPicture(nowPath2 & "\630.gif")
-FrmMain.Imgicon2(6).Picture = LoadPicture(nowPath2 & "\607.gif")
+FrmMain.Imgicon(0).Picture = LoadPicture(LoadP(nowPath & "\415.gif"))
+FrmMain.Imgicon(1).Picture = LoadPicture(LoadP(nowPath & "\404.gif"))
+FrmMain.Imgicon(2).Picture = LoadPicture(LoadP(nowPath & "\407.gif"))
+FrmMain.Imgicon(3).Picture = LoadPicture(LoadP(nowPath & "\473.gif"))
+FrmMain.Imgicon(4).Picture = LoadPicture(LoadP(nowPath & "\391.gif"))
+FrmMain.Imgicon(5).Picture = LoadPicture(LoadP(nowPath & "\457.gif"))
+FrmMain.Imgicon(6).Picture = LoadPicture(LoadP(nowPath & "\394.gif"))
+FrmMain.Imgicon(8).Picture = LoadPicture(LoadP(nowPath & "\416.gif"))
+FrmMain.Imgicon(9).Picture = LoadPicture(LoadP(nowPath & "\335.gif"))
+FrmMain.Imgicon2(0).Picture = LoadPicture(LoadP(nowPath2 & "\595.gif"))
+FrmMain.Imgicon2(1).Picture = LoadPicture(LoadP(nowPath2 & "\623.gif"))
+FrmMain.Imgicon2(2).Picture = LoadPicture(LoadP(nowPath2 & "\627.gif"))
+FrmMain.Imgicon2(3).Picture = LoadPicture(LoadP(nowPath2 & "\626.gif"))
+FrmMain.Imgicon2(4).Picture = LoadPicture(LoadP(nowPath2 & "\618.gif"))
+FrmMain.Imgicon2(5).Picture = LoadPicture(LoadP(nowPath2 & "\630.gif"))
+FrmMain.Imgicon2(6).Picture = LoadPicture(LoadP(nowPath2 & "\607.gif"))
 End If
 End Sub
-
+Public Function LoadP(Path As String)
+If Len(Dir(Path)) = 0 Then Path = App.Path & "\icon\Error.gif"
+LoadP = Path
+End Function
 
 Public Sub SaveDAT(Savepath As String)
 Dim Offset%, p As Byte
@@ -129,11 +136,11 @@ End If
 Close #1
 End Sub
 
-Public Sub OpenDAT(path As String)
+Public Sub OpenDAT(Path As String)
 Dim Offset%, p As Byte
 Dim ONE_right As Byte, ONE_bottom As Byte, TBGR_Color$, fontNO As Byte
 
-Open path For Binary As #1
+Open Path For Binary As #1
 '读取图标位置数据
     For Offset = 1 To 76 Step 8
         Get #1, Offset + 1, one(0)            'left
