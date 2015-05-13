@@ -18,7 +18,7 @@ Begin VB.Form FrmMain
       BorderStyle     =   0  'None
       ForeColor       =   &H80000008&
       Height          =   1200
-      Left            =   3120
+      Left            =   3000
       Picture         =   "frmMain.frx":0000
       ScaleHeight     =   1200
       ScaleWidth      =   1470
@@ -97,10 +97,10 @@ Begin VB.Form FrmMain
    Begin VB.CheckBox chkIconBS 
       Caption         =   "图标显示边框"
       Height          =   255
-      Left            =   4800
+      Left            =   4560
       TabIndex        =   15
       Top             =   480
-      Width           =   1455
+      Width           =   1815
    End
    Begin VB.PictureBox Wallpaper 
       Appearance      =   0  'Flat
@@ -221,7 +221,7 @@ Begin VB.Form FrmMain
    Begin VB.VScrollBar VSXY 
       Height          =   375
       Index           =   3
-      Left            =   5880
+      Left            =   6000
       TabIndex        =   8
       Top             =   1680
       Width           =   255
@@ -229,7 +229,7 @@ Begin VB.Form FrmMain
    Begin VB.VScrollBar VSXY 
       Height          =   375
       Index           =   1
-      Left            =   4320
+      Left            =   4200
       TabIndex        =   4
       Top             =   1680
       Width           =   255
@@ -237,7 +237,7 @@ Begin VB.Form FrmMain
    Begin VB.VScrollBar VSXY 
       Height          =   375
       Index           =   2
-      Left            =   5880
+      Left            =   6000
       TabIndex        =   6
       Top             =   960
       Width           =   255
@@ -245,7 +245,7 @@ Begin VB.Form FrmMain
    Begin VB.VScrollBar VSXY 
       Height          =   375
       Index           =   0
-      Left            =   4320
+      Left            =   4200
       TabIndex        =   2
       Top             =   960
       Width           =   255
@@ -253,10 +253,10 @@ Begin VB.Form FrmMain
    Begin VB.Frame Fra_time_area 
       Caption         =   "时间相关"
       Height          =   1335
-      Left            =   3120
+      Left            =   3000
       TabIndex        =   13
       Top             =   2400
-      Width           =   3135
+      Width           =   3375
       Begin VB.TextBox txthint 
          Appearance      =   0  'Flat
          BackColor       =   &H8000000F&
@@ -275,7 +275,7 @@ Begin VB.Form FrmMain
          TabIndex        =   18
          Text            =   "请选择字体编号"
          Top             =   840
-         Width           =   2055
+         Width           =   2295
       End
       Begin VB.TextBox txttime 
          Appearance      =   0  'Flat
@@ -301,16 +301,16 @@ Begin VB.Form FrmMain
       Begin VB.CommandButton cmdtimeColor 
          Caption         =   "颜色"
          Height          =   375
-         Left            =   1560
+         Left            =   1920
          TabIndex        =   16
          Top             =   240
-         Width           =   615
+         Width           =   1095
       End
    End
    Begin VB.TextBox txtXY 
       Height          =   390
       Index           =   3
-      Left            =   5400
+      Left            =   5520
       TabIndex        =   7
       Top             =   1680
       Width           =   495
@@ -318,7 +318,7 @@ Begin VB.Form FrmMain
    Begin VB.TextBox txtXY 
       Height          =   375
       Index           =   2
-      Left            =   5400
+      Left            =   5520
       TabIndex        =   5
       Top             =   960
       Width           =   495
@@ -326,7 +326,7 @@ Begin VB.Form FrmMain
    Begin VB.TextBox txtXY 
       Height          =   375
       Index           =   1
-      Left            =   3840
+      Left            =   3720
       TabIndex        =   3
       Top             =   1680
       Width           =   495
@@ -334,18 +334,17 @@ Begin VB.Form FrmMain
    Begin VB.TextBox txtXY 
       Height          =   375
       Index           =   0
-      Left            =   3840
+      Left            =   3720
       TabIndex        =   1
       Top             =   960
       Width           =   495
    End
    Begin VB.ComboBox cbbSelect 
       Height          =   300
-      Left            =   3120
+      Left            =   3000
       TabIndex        =   0
-      Text            =   "请选择图标"
       Top             =   480
-      Width           =   1335
+      Width           =   1455
    End
    Begin MSComDlg.CommonDialog CommonDialog1 
       Left            =   5880
@@ -358,7 +357,7 @@ Begin VB.Form FrmMain
       Caption         =   "高度"
       Height          =   255
       Index           =   3
-      Left            =   4800
+      Left            =   4920
       TabIndex        =   12
       Top             =   1800
       Width           =   495
@@ -367,7 +366,7 @@ Begin VB.Form FrmMain
       Caption         =   "宽度"
       Height          =   255
       Index           =   2
-      Left            =   4800
+      Left            =   4920
       TabIndex        =   11
       Top             =   1080
       Width           =   495
@@ -376,7 +375,7 @@ Begin VB.Form FrmMain
       Caption         =   "顶部"
       Height          =   255
       Index           =   1
-      Left            =   3240
+      Left            =   3120
       TabIndex        =   10
       Top             =   1800
       Width           =   495
@@ -385,7 +384,7 @@ Begin VB.Form FrmMain
       Caption         =   "左侧"
       Height          =   255
       Index           =   0
-      Left            =   3240
+      Left            =   3120
       TabIndex        =   9
       Top             =   1080
       Width           =   495
@@ -394,10 +393,10 @@ Begin VB.Form FrmMain
       Caption         =   "文件(&F)"
       Begin VB.Menu munNew 
          Caption         =   "新建(&N)"
-         Begin VB.Menu L7E398 
+         Begin VB.Menu munL7E398 
             Caption         =   "L7/E398"
          End
-         Begin VB.Menu V3I 
+         Begin VB.Menu munV3I 
             Caption         =   "V3I"
          End
       End
@@ -435,27 +434,27 @@ Attribute VB_Exposed = False
 Option Explicit
 Dim DragX As Single, DragY As Single
 Private Sub Form_Load()
-cbbfontNO.AddItem "00|??"
-cbbfontNO.AddItem "01|最常用的字体"
-cbbfontNO.AddItem "02|(和01一样，不明)"
-cbbfontNO.AddItem "03|(时间)"
-cbbfontNO.AddItem "04|拨号,超过3行时"
-cbbfontNO.AddItem "05|拨号"
-cbbfontNO.AddItem "06|??"
-cbbfontNO.AddItem "07|英文日程表"
-cbbfontNO.AddItem "08|外部屏幕"
-cbbfontNO.AddItem "09|(很窄的数字)"
-cbbfontNO.AddItem "0A|(浏览器 粗)"
-cbbfontNO.AddItem "0B|泰文"
-cbbfontNO.AddItem "0C|短信"
-cbbfontNO.AddItem "0D|(大数字)"
-cbbfontNO.AddItem "0E|(很大的数字+冒号)"
-cbbfontNO.AddItem "0F|(很大的AMP)"
-cbbfontNO.AddItem "10|无字符"
-cbbfontNO.AddItem "11|无字符"
-cbbfontNO.AddItem "12|中文??"
-cbbfontNO.AddItem "13|中文笔画输入"
-cbbfontNO.AddItem "14|中文拼音输入"
+cbbfontNO.AddItem GetINI("lng", "cbbfontNO00")
+cbbfontNO.AddItem GetINI("lng", "cbbfontNO01")
+cbbfontNO.AddItem GetINI("lng", "cbbfontNO02")
+cbbfontNO.AddItem GetINI("lng", "cbbfontNO03")
+cbbfontNO.AddItem GetINI("lng", "cbbfontNO04")
+cbbfontNO.AddItem GetINI("lng", "cbbfontNO05")
+cbbfontNO.AddItem GetINI("lng", "cbbfontNO06")
+cbbfontNO.AddItem GetINI("lng", "cbbfontNO07")
+cbbfontNO.AddItem GetINI("lng", "cbbfontNO08")
+cbbfontNO.AddItem GetINI("lng", "cbbfontNO09")
+cbbfontNO.AddItem GetINI("lng", "cbbfontNO0A")
+cbbfontNO.AddItem GetINI("lng", "cbbfontNO0B")
+cbbfontNO.AddItem GetINI("lng", "cbbfontNO0C")
+cbbfontNO.AddItem GetINI("lng", "cbbfontNO0D")
+cbbfontNO.AddItem GetINI("lng", "cbbfontNO0E")
+cbbfontNO.AddItem GetINI("lng", "cbbfontNO0F")
+cbbfontNO.AddItem GetINI("lng", "cbbfontNO10")
+cbbfontNO.AddItem GetINI("lng", "cbbfontNO11")
+cbbfontNO.AddItem GetINI("lng", "cbbfontNO12")
+cbbfontNO.AddItem GetINI("lng", "cbbfontNO13")
+cbbfontNO.AddItem GetINI("lng", "cbbfontNO14")
 txttime.Text = Time
 munSave.Enabled = False
 munSaveAs.Enabled = False
@@ -468,8 +467,7 @@ Next
 Wallpaper2.Visible = False
 Fra_time_area.Visible = False
 
-load_cfg (App.Path & "\Config.cfg")
-apply_Picture (PictureFT)
+apply_Picture
 End Sub
 
 Private Sub Timer1_Timer()
@@ -483,13 +481,13 @@ Private Sub munSetting_Click()
     frmSetting.Show
 End Sub
 Private Sub munExit_Click()
-    If MsgBox("保存吗？", vbYesNo, "提示") = vbYes Then Call munSave_Click
+    If MsgBox(GetINI("lng", "SavePrompt"), vbYesNo, GetINI("lng", "Savetitle")) = vbYes Then Call munSave_Click
     End
 End Sub
 Private Sub munSaveAs_Click()
 '保存图标位置数据
 CommonDialog1.FileName = "REGION_TABLE"
-CommonDialog1.Filter = "状态栏时间各种颜色的位置文件"
+CommonDialog1.Filter = GetINI("lng", "munSaveAs_CF")
 CommonDialog1.CancelError = True
 On Error Resume Next
 CommonDialog1.ShowSave
@@ -503,7 +501,7 @@ Private Sub munSave_Click()
 End Sub
 
 Private Sub munOpen_Click()
-CommonDialog1.Filter = "状态栏时间各种颜色的位置文件|REGION_TABLE"
+CommonDialog1.Filter = GetINI("lng", "munOpen_CF")
 CommonDialog1.CancelError = True
 On Error Resume Next
 CommonDialog1.ShowOpen
@@ -517,16 +515,16 @@ Close #1
     munSave.Enabled = True
     munSaveAs.Enabled = True
 End Sub
-Private Sub L7E398_Click()
+Private Sub munL7E398_Click()
     Platform = 1
-    OpenDAT (App.Path & "\Config.cfg")
+    OpenDAT (App.Path & "\L7E398.cfg")
     Savepath = ""
     munSaveAs.Enabled = True
     munSave.Enabled = True
 End Sub
-Private Sub V3I_Click()
+Private Sub munV3I_Click()
     Platform = 2
-    OpenDAT (App.Path & "\Config2.cfg")
+    OpenDAT (App.Path & "\V3I.cfg")
     Savepath = ""
     munSaveAs.Enabled = True
     munSave.Enabled = True
@@ -540,10 +538,11 @@ End Sub
 '更改时间字体编号提示
 Private Sub cbbfontNO_Click()
 Dim Response, scarcity$, nono$, warn$, advise$
-scarcity = "不建议设置此字体！" & Chr(13) & Chr(10) & "（原CG4字体包中）此组字体可能缺少以下字符：" & Chr(13) & Chr(10) & Chr(13) & Chr(10) & "数字0-9、标点：（字母A M P）"
-nono = "不能设置此字体！此编号不含任何字符"
-warn = "警告！"
-advise = "建议！"
+scarcity = GetINI("lng", "scarcity1_MG") & Chr(13) & Chr(10) & GetINI("lng", "scarcity2_MG") & Chr(13) & Chr(10) & Chr(13) & Chr(10) & GetINI("lng", "scarcity3_MG")
+'不建议设置此字体！"（原CG4字体包中）此组字体可能缺少以下字符：数字0-9、标点：（字母A M P）
+nono = GetINI("lng", "nono_MG") '不能设置此字体！此编号不含任何字符
+warn = GetINI("lng", "warn_MG") '警告！
+advise = GetINI("lng", "advise_MG") '建议！
 
 Select Case cbbfontNO.ListIndex
 Case 4

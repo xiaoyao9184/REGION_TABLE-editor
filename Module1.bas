@@ -1,7 +1,5 @@
 Attribute VB_Name = "Module1"
 Option Explicit
-Public PictureFT As Byte, PicturePath As Byte '加载图片，默认/其他
-Public WallpaperPath$, Wallpaper2Path$, IconPath$, IconPath2$ '背景，主屏，外屏
 
 Public Platform As Byte '机型（1=L7/E398，2=V3/V3I）
 Public Savepath$ '保存路径
@@ -43,36 +41,59 @@ Public Sub Main()
         FrmMain.munSave.Enabled = True
         FrmMain.munSaveAs.Enabled = True
     End If
+FrmMain.Caption = GetINI("lng", "MainCaption")
+FrmMain.munFile.Caption = GetINI("lng", "munFile")
+FrmMain.munNew.Caption = GetINI("lng", "munNew")
+FrmMain.munL7E398.Caption = GetINI("lng", "munL7E398")
+FrmMain.munV3I.Caption = GetINI("lng", "munV3I")
+FrmMain.munOpen.Caption = GetINI("lng", "munOpen")
+FrmMain.munSave.Caption = GetINI("lng", "munSave")
+FrmMain.munSaveAs.Caption = GetINI("lng", "munSaveAs")
+FrmMain.munExit.Caption = GetINI("lng", "munExit")
+FrmMain.munOther.Caption = GetINI("lng", "munOther")
+FrmMain.munSetting.Caption = GetINI("lng", "munSetting")
+FrmMain.munAbout.Caption = GetINI("lng", "munAbout")
+FrmMain.chkIconBS.Caption = GetINI("lng", "chkIconBS")
+FrmMain.LblXY(0).Caption = GetINI("lng", "LblXY_Left")
+FrmMain.LblXY(1).Caption = GetINI("lng", "LblXY_Width")
+FrmMain.LblXY(2).Caption = GetINI("lng", "LblXY_Top")
+FrmMain.LblXY(3).Caption = GetINI("lng", "LblXY_Hight")
+FrmMain.Fra_time_area.Caption = GetINI("lng", "Fra_time_area")
+FrmMain.cmdtimeColor.Caption = GetINI("lng", "cmdtimeColor")
+FrmMain.txthint.Text = GetINI("lng", "txthint")
+
+
+frmSetting.Caption = GetINI("lng", "SettingCaption")
+frmSetting.chkPicture.Caption = GetINI("lng", "chkPicture")
+frmSetting.fraPicture.Caption = GetINI("lng", "fraPicture")
+frmSetting.optPictureSuff_Other(0).Caption = GetINI("lng", "optPictureSuff")
+frmSetting.optPictureSuff_Other(1).Caption = GetINI("lng", "optPictureOther")
+frmSetting.Label1.Caption = GetINI("lng", "Label1")
+frmSetting.Label2.Caption = GetINI("lng", "Label2")
+frmSetting.Label3.Caption = GetINI("lng", "Label3")
+frmSetting.Label4.Caption = GetINI("lng", "Label4")
+frmSetting.cmdWallpaper.Caption = GetINI("lng", "cmdWallpaper")
+frmSetting.cmdIcon.Caption = GetINI("lng", "cmdIcon")
+frmSetting.cmdWallpaper2.Caption = GetINI("lng", "cmdWallpaper2")
+frmSetting.cmdIcon2.Caption = GetINI("lng", "cmdIcon2")
+frmSetting.cmdSave.Caption = GetINI("lng", "cmdSave")
+frmSetting.cmdapply.Caption = GetINI("lng", "cmdapply")
 End Sub
 
 
-Public Sub load_cfg(cfgPath)
-Open cfgPath For Binary As #3
-    Get #3, 98, PictureFT
-    Get #3, 99, PicturePath
-    Seek #3, 104
-    Line Input #3, WallpaperPath
-    Seek #3, Seek(3) + 4
-    Line Input #3, Wallpaper2Path
-    Seek #3, Seek(3) + 4
-    Line Input #3, IconPath
-    Seek #3, Seek(3) + 4
-    Line Input #3, IconPath2
-Close #3
-End Sub
-Public Sub apply_Picture(FT)
+Public Sub apply_Picture()
 Dim nowPath$, nowPath2$
-If FT = 1 Then
-    If PicturePath = 0 Then
-        nowPath = App.Path & "\icon"
-        nowPath2 = App.Path & "\icon\V3I"
+If GetINI("Setting", "PictureFT") = 1 Then
+    If GetINI("Setting", "PictureSuff_Other") = 0 Then
+        nowPath = App.Path & "\icon\"
+        nowPath2 = App.Path & "\icon\V3I\"
         FrmMain.Wallpaper.Picture = LoadPicture(LoadP(App.Path & "\icon\Wallpaper.jpg"))
         FrmMain.Wallpaper2.Picture = LoadPicture(LoadP(App.Path & "\icon\V3I\cl.gif"))
     Else
-        nowPath = IconPath
-        nowPath2 = IconPath2
-        FrmMain.Wallpaper.Picture = LoadPicture(LoadP(WallpaperPath))
-        FrmMain.Wallpaper2.Picture = LoadPicture(LoadP(Wallpaper2Path))
+        nowPath = GetINI("Setting", "IconPath")
+        nowPath2 = GetINI("Setting", "Icon2Path")
+        FrmMain.Wallpaper.Picture = LoadPicture(LoadP(GetINI("Setting", "WallpaperPath")))
+        FrmMain.Wallpaper2.Picture = LoadPicture(LoadP(GetINI("Setting", "Wallpaper2Path")))
     End If
 FrmMain.Imgicon(0).Picture = LoadPicture(LoadP(nowPath & "\415.gif"))
 FrmMain.Imgicon(1).Picture = LoadPicture(LoadP(nowPath & "\404.gif"))
@@ -94,7 +115,7 @@ End If
 End Sub
 Public Function LoadP(Path As String)
 If Len(Dir(Path)) = 0 Then Path = App.Path & "\icon\Error.gif"
-LoadP = Path
+LoadP = Replace(Path, "\\", "\")
 End Function
 
 Public Sub SaveDAT(Savepath As String)
@@ -167,17 +188,17 @@ Open Path For Binary As #1
     Next
 If Platform = 1 Then
     FrmMain.cbbSelect.Clear
-    FrmMain.cbbSelect.AddItem "信号"
-    FrmMain.cbbSelect.AddItem "GPRS"
-    FrmMain.cbbSelect.AddItem "数据"
-    FrmMain.cbbSelect.AddItem "漫游"
-    FrmMain.cbbSelect.AddItem "拨号"
-    FrmMain.cbbSelect.AddItem "JAVA"
-    FrmMain.cbbSelect.AddItem "短信"
-    FrmMain.cbbSelect.AddItem "时间"
-    FrmMain.cbbSelect.AddItem "铃音"
-    FrmMain.cbbSelect.AddItem "电量"
-    FrmMain.cbbSelect.Text = "请选择图标"
+    FrmMain.cbbSelect.AddItem GetINI("lng", "cbbSelect1")
+    FrmMain.cbbSelect.AddItem GetINI("lng", "cbbSelect2")
+    FrmMain.cbbSelect.AddItem GetINI("lng", "cbbSelect3")
+    FrmMain.cbbSelect.AddItem GetINI("lng", "cbbSelect4")
+    FrmMain.cbbSelect.AddItem GetINI("lng", "cbbSelect5")
+    FrmMain.cbbSelect.AddItem GetINI("lng", "cbbSelect6")
+    FrmMain.cbbSelect.AddItem GetINI("lng", "cbbSelect7")
+    FrmMain.cbbSelect.AddItem GetINI("lng", "cbbSelect8")
+    FrmMain.cbbSelect.AddItem GetINI("lng", "cbbSelect9")
+    FrmMain.cbbSelect.AddItem GetINI("lng", "cbbSelect10")
+    FrmMain.cbbSelect.Text = GetINI("lng", "cbbSelectText")
     FrmMain.Fra_time_area.Visible = True
     FrmMain.Wallpaper2.Visible = False
     '读取时间颜色，显示时间颜色
@@ -199,24 +220,24 @@ If Platform = 1 Then
     FrmMain.cbbfontNO.ListIndex = fontNO
 ElseIf Platform = 2 Then
     FrmMain.cbbSelect.Clear
-    FrmMain.cbbSelect.AddItem "信号"
-    FrmMain.cbbSelect.AddItem "GPRS"
-    FrmMain.cbbSelect.AddItem "数据"
-    FrmMain.cbbSelect.AddItem "漫游"
-    FrmMain.cbbSelect.AddItem "拨号"
-    FrmMain.cbbSelect.AddItem "JAVA"
-    FrmMain.cbbSelect.AddItem "短信"
-    FrmMain.cbbSelect.AddItem "时间"
-    FrmMain.cbbSelect.AddItem "铃音"
-    FrmMain.cbbSelect.AddItem "电量"
-    FrmMain.cbbSelect.AddItem "外屏信号"
-    FrmMain.cbbSelect.AddItem "外屏GPRS"
-    FrmMain.cbbSelect.AddItem "外屏数据"
-    FrmMain.cbbSelect.AddItem "外屏漫游"
-    FrmMain.cbbSelect.AddItem "外屏JAVA"
-    FrmMain.cbbSelect.AddItem "外屏短信"
-    FrmMain.cbbSelect.AddItem "外屏电量"
-    FrmMain.cbbSelect.Text = "请选择图标"
+    FrmMain.cbbSelect.AddItem GetINI("lng", "cbbSelect1")
+    FrmMain.cbbSelect.AddItem GetINI("lng", "cbbSelect2")
+    FrmMain.cbbSelect.AddItem GetINI("lng", "cbbSelect3")
+    FrmMain.cbbSelect.AddItem GetINI("lng", "cbbSelect4")
+    FrmMain.cbbSelect.AddItem GetINI("lng", "cbbSelect5")
+    FrmMain.cbbSelect.AddItem GetINI("lng", "cbbSelect6")
+    FrmMain.cbbSelect.AddItem GetINI("lng", "cbbSelect7")
+    FrmMain.cbbSelect.AddItem GetINI("lng", "cbbSelect8")
+    FrmMain.cbbSelect.AddItem GetINI("lng", "cbbSelect9")
+    FrmMain.cbbSelect.AddItem GetINI("lng", "cbbSelect10")
+    FrmMain.cbbSelect.AddItem GetINI("lng", "cbbSelect11")
+    FrmMain.cbbSelect.AddItem GetINI("lng", "cbbSelect12")
+    FrmMain.cbbSelect.AddItem GetINI("lng", "cbbSelect13")
+    FrmMain.cbbSelect.AddItem GetINI("lng", "cbbSelect14")
+    FrmMain.cbbSelect.AddItem GetINI("lng", "cbbSelect15")
+    FrmMain.cbbSelect.AddItem GetINI("lng", "cbbSelect16")
+    FrmMain.cbbSelect.AddItem GetINI("lng", "cbbSelect17")
+    FrmMain.cbbSelect.Text = GetINI("lng", "cbbSelectText")
     FrmMain.Fra_time_area.Visible = False
     FrmMain.Wallpaper2.Visible = True
     For Offset = 81 To 129 Step 8
